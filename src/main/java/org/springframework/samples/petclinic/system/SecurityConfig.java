@@ -28,7 +28,7 @@ public class SecurityConfig {
 			.requestMatchers("/customers/**")
 			.hasRole("USER")
 			.anyRequest()
-			.permitAll());
+			.permitAll()).logout((logout) -> logout.logoutSuccessUrl("/"));
 
 		return http.build();
 	}

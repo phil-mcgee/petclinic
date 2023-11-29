@@ -1,5 +1,5 @@
 <!doctype html>
-<html th:fragment="layout (template, menu)">
+<html th:fragment="layout (template, menu)" xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
 
 <head>
 
@@ -71,6 +71,19 @@
             <span>Error</span>
           </li>
 
+          <div sec:authorize="isAnonymous()">
+            <li th:replace="~{::menuItem ('/customers','notactive','login','sign-in','Login')}">
+              <span class="fa fa-sign-in" aria-hidden="true"></span>
+              <div sec:authentication="name"></div>
+            </li>
+          </div>
+
+          <div sec:authorize="isAuthenticated()">
+            <li th:replace="~{::menuItem ('/logout','notactive','logout','sign-out','Logout')}">
+              <span class="fa fa-sign-out" aria-hidden="true"></span>
+              <span>Logout</span>
+            </li>
+          </div>
         </ul>
       </div>
     </div>
