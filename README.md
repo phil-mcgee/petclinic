@@ -37,8 +37,8 @@ docker compose-up
 ```
 
 Hint: For quicker development you can kill the petclinic docker container but leave the DB container
-running.  Then you can launch a local petclinic and it will use the DB container.  This
-app instance won't run with the Contrast agent.
+running.  Then you can launch a local petclinic and it will use the DB container.  (This
+app instance won't run with the Contrast agent.)
 ```asciidoc
 java -jar target/spring-petclinic-3.1.0-SNAPSHOT.jar     
 ```
