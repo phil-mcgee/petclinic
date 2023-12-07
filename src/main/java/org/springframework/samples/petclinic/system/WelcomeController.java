@@ -33,7 +33,8 @@ class WelcomeController {
 	@GetMapping("/")
 	public String welcome(Model model) {
 		model.addAttribute("welcomeMessage", readWelcomeMessage());
-		model.addAttribute("astronomyData", getAstronomicalData());
+		// model.addAttribute("astronomyData", getAstronomicalData());
+		model.addAttribute("astronomyData", "Your moon is rising.");
 		return "welcome";
 	}
 
