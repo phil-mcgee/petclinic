@@ -1,0 +1,693 @@
+# ==============================================================================
+# Use the properties in this YAML file to configure a Contrast agent.
+# Go to https://docs.contrastsecurity.com/en/order-of-precedence.html
+# to determine the order of precedence for configuration values.
+# ==============================================================================
+
+
+# Use this setting if you want to temporarily disable a Contrast agent.
+# Set to `true` to enable the agent; set to `false` to disable the agent.
+# enable: true
+
+# ==============================================================================
+# api
+# Use the properties in this section to connect the agent to the Contrast UI.
+# ==============================================================================
+api:
+
+  # ********************** REQUIRED **********************
+  # Set the URL for the Contrast UI.
+  url: FIXME
+
+  # ********************** REQUIRED **********************
+  # Set the API key needed to communicate with the Contrast UI.
+  api_key: FIXME
+
+  # ********************** REQUIRED **********************
+  # Set the service key needed to communicate with the Contrast
+  # UI. It is used to calculate the Authorization header.
+  service_key: FIXME
+
+  # ********************** REQUIRED **********************
+  # Set the user name used to communicate with the Contrast
+  # UI. It is used to calculate the Authorization header.
+  user_name: FIXME
+
+  # ============================================================================
+  # api.proxy
+  # Use the following properties for communication
+  # with the Contrast UI over a proxy.
+  # ============================================================================
+  # proxy:
+
+    # Set value to `true` for the agent to communicate with
+    # the Contrast web interface over a proxy. Set value to
+    # `false` if you don't want to use the proxy. If no value is
+    # indicated, the presence of a valid **contrast.proxy.host**
+    # and **contrast.proxy.port** will enable the proxy.
+    # enable: NEEDS_TO_BE_SET
+
+    # Set the URL for your Proxy Server. The URL form is `scheme://host:port`.
+    # url: NEEDS_TO_BE_SET
+
+# ==============================================================================
+# agent
+# Use the properties in this section to control the way and frequency
+# with which the agent communicates to logs and the Contrast UI.
+# ==============================================================================
+agent:
+
+  # Set to limit the length of Error stack traces to a specified number.
+  # stack_trace_limit: 10
+
+  # ============================================================================
+  # agent.diagnostics
+  # Use the properties in this section to specify the information the agent
+  # should collect and report in order to diagnose problems in the agent.
+  #  
+  # ============================================================================
+  # diagnostics:
+
+    # Set to `false` to disable agent diagnostics
+    #  
+    # enable: true
+
+  # ============================================================================
+  # agent.logger
+  # Define the following properties to set logging values.
+  # If the following properties are not defined, the
+  # agent uses the logging values from the Contrast UI.
+  # ============================================================================
+  logger:
+
+    # Enable diagnostic logging by setting a path to a log file.
+    # While diagnostic logging hurts performance, it generates
+    # useful information for debugging Contrast. The value set here
+    # is the location to which the agent saves log output. If no
+    # log file exists at this location, the agent creates a file.
+    #  
+    # Example - `/opt/Contrast/contrast.log` creates a log in the
+    # `/opt/Contrast` directory, and rotates it automatically as needed.
+    #  
+    # path: ./contrast_agent.log
+
+    # Set the the log output level. Valid options are
+    # `ERROR`, `WARN`, `INFO`, `DEBUG`, and `TRACE`.
+    level: INFO
+
+    # Set to `false` for the agent to always create a
+    # new log file instead of appending and rolling.
+    # append: true
+
+    # Set to `true` to redirect all logs to
+    # `stdout` instead of the file system.
+    stdout: false
+
+    # Set to `true` to log to STDERR.
+    stderr: true
+
+    # Set the roll size for log files in megabytes. The agent will
+    # attempt to prevent the log file from being larger than this size.
+    # This feature is only available in agent version >=4.0.0
+    # roll_size: 100M
+
+    # Set the number of backup files to keep. Set to `0` to disable.
+    # This feature is only available in agent version >=4.0.0
+    # backups: 10
+
+  # ============================================================================
+  # agent.security_logger
+  # Define the following properties to set security
+  # logging values. If not defined, the agent uses the
+  # security logging (CEF) values from the Contrast UI.
+  # ============================================================================
+  # security_logger:
+
+    # Set the file to which the agent logs security events.
+    # path: /.contrast/security.log
+
+    # Set the log level for security logging. Valid options
+    # are `ERROR`, `WARN`, `INFO`, `DEBUG`, and `TRACE`.
+    # level: ERROR
+
+    # ==========================================================================
+    # agent.security_logger.syslog
+    # Define the following properties to set Syslog values. If the properties
+    # are not defined, the agent uses the Syslog values from the Contrast UI.
+    # ==========================================================================
+    # syslog:
+
+      # Set to `true` to enable Syslog logging.
+      # enable: NEEDS_TO_BE_SET
+
+      # Set the IP address of the Syslog server
+      # to which the agent should send messages.
+      # ip: NEEDS_TO_BE_SET
+
+      # Set the port of the Syslog server to
+      # which the agent should send messages.
+      # port: NEEDS_TO_BE_SET
+
+      # Set the facility code of the messages the agent sends to Syslog.
+      # facility: 19
+
+      # Set the log level of Exploited attacks. Value options are `ALERT`,
+      # `CRITICAL`, `ERROR`, `WARNING`, `NOTICE`, `INFO`, and `DEBUG`.
+      # severity_exploited: ALERT
+
+      # Set the log level of Blocked attacks. Value options are `ALERT`,
+      # `CRITICAL`, `ERROR`, `WARNING`, `NOTICE`, `INFO`, and `DEBUG`.
+      # severity_blocked: NOTICE
+
+      # Set the log level of Blocked At Perimeter
+      # attacks. Value options are `ALERT`, `CRITICAL`,
+      # `ERROR`, `WARNING`, `NOTICE`, `INFO`, and `DEBUG`.
+      # severity_blocked_perimeter: NOTICE
+
+      # Set the log level of Probed attacks. Value options are `ALERT`,
+      # `CRITICAL`, `ERROR`, `WARNING`, `NOTICE`, `INFO`, and `DEBUG`.
+      # severity_probed: WARNING
+
+      # Set the log level of Suspicious attacks. Value options are `ALERT`,
+      # `CRITICAL`, `ERROR`, `WARNING`, `NOTICE`, `INFO`, and `DEBUG`.
+      # severity_suspicious: WARNING
+
+  # ============================================================================
+  # agent.service
+  # The following properties are used by the Contrast Service.
+  # ============================================================================
+  # service:
+
+    # Set to `false` to disallow the service to be started, and
+    # effectively disable the agent, if read by the service. If the
+    # agent reads this property, it disallows service auto-start.
+    # enable: true
+
+    # Set to `true` to enable listening for gRPC connections.
+    # The `socket`, `host` and `port` fields will be used for
+    # configuring the gRPC server in place of the legacy RPC server.
+    # grpc: false
+
+    # If this property is defined, the service is
+    # listening on a Unix socket at the defined path.
+    # socket: /tmp/service.sock
+
+    # ********************** REQUIRED **********************
+    # Set the the hostname or IP address of the Contrast
+    # service to which the Contrast agent should report.
+    # host: localhost
+
+    # ********************** REQUIRED **********************
+    # Set the the port of the Contrast service
+    # to which the Contrast agent should report.
+    # port: 30555
+
+    # ==========================================================================
+    # agent.service.teamserver_retry
+    # The following properties are used by the Teamserver HTTP client
+    # to configure failed request retrying in the Contrast service.
+    # ==========================================================================
+    # teamserver_retry:
+
+      # Enable retrying HTTP requests to the Teamserver endpoint.
+      # enable: true
+
+      # How long to wait between retries in milliseconds.
+      # interval_ms: 5000
+
+      # How many times to retry HTTP requests to Teamserver before giving up.
+      # max_attempts: 3
+
+    # ==========================================================================
+    # agent.service.logger
+    # The following properties are used by the logger in the
+    # Contrast service. If the properties are not defined, the
+    # service uses the logging values from the Contrast UI.
+    # ==========================================================================
+    # logger:
+
+      # Set the the log output level. Options are `OFF`, `FATAL`,
+      # `ERROR`, `WARN`, `INFO`, `DEBUG`, `TRACE`, and `ALL`.
+      # level: ERROR
+
+      # Override the name of the process used in logs.
+      # progname: Contrast Service
+
+      # Set to `true` to send log output to `stdout`.
+      # stdout: false
+
+  # ============================================================================
+  # agent.heap_dump
+  # The following properties are used to trigger heap dumps from within
+  # the agent to snapshot the behavior of instrumented applications.
+  # ============================================================================
+  # heap_dump:
+
+    # Set to `true` for the agent to automatically
+    # take heap dumps of the instrumented application.
+    # enable: false
+
+    # Set the location to which to save the heap dump files. If relative,
+    # the path is determined based on the process' working directory.
+    # path: contrast_heap_dumps
+
+    # Set the amount of time to wait, in milliseconds,
+    # after agent startup to begin taking heap dumps.
+    # delay_ms: 10_000
+
+    # Set the amount of time to wait, in milliseconds, between each heap dump.
+    # window_ms: 10_000
+
+    # Set the number of heap dumps to take before disabling this feature.
+    # count: 5
+
+  # ============================================================================
+  # agent.node
+  # The following properties apply to any Node configurations.
+  # ============================================================================
+  # node:
+
+    # Set the location of the application's `package.json` file.
+    # app_root: NEEDS_TO_BE_SET
+
+    # ==========================================================================
+    # agent.node.rewrite_cache
+    # Use the following properties to set up rewrite caching in the agent.
+    # ==========================================================================
+    # rewrite_cache:
+
+      # Set to `true` to enable rewrite caching.
+      # enable: false
+
+      # Set the location of the rewrite cache source.
+      # path: NEEDS_TO_BE_SET
+
+# ==============================================================================
+# inventory
+# Use the properties in this section to override the inventory features.
+# ==============================================================================
+# inventory:
+
+  # Apply a list of labels to libraries. Labels
+  # must be formatted as a comma-delimited list.
+  # Example - `label1, label2, label3`
+  #  
+  # tags: NEEDS_TO_BE_SET
+
+# ==============================================================================
+# assess
+# Use the properties in this section to control Assess.
+# ==============================================================================
+assess:
+
+  # Include this property to determine if the Assess
+  # feature should be enabled. If this property is not
+  # present, the decision is delegated to the Contrast UI.
+  enable: true
+
+  # Apply a list of labels to vulnerabilities and preflight
+  # messages. Labels must be formatted as a comma-delimited list.
+  # Example - `label1, label2, label3`
+  #  
+  # tags: NEEDS_TO_BE_SET
+
+  # Set to `true` to trust incoming strings when they pass
+  # custom validators (Mongoose, Joi, validator, fastify-static)
+  # This feature is only available in agent version 4.10.0 and later
+  # trust_custom_validators: false
+
+  # Enables the serve-static module as a path-traversal
+  # sanitizer. Express uses serve-static in a safe way
+  # but manual setup of serve-static can be vulnerable.
+  #  
+  # Even with Express there is a possibility for "traversing-down" the served
+  # folder or user misconfiguration if not configured with an absolute path
+  #  
+  # This feature is only available in agent version 4.31.0 and later
+  # enable_sanitizer_serve_static: false
+
+  # When set to `true`, string tracking will occur lazily as user-controlled
+  # values are accessed by application code. When `false`, tracking will
+  # occur at the time of input parsing and will be limited to 250 values.
+  # This feature is only available in agent version 4.18.0 and later
+  # enable_lazy_tracking: true
+
+  # ============================================================================
+  # assess.sampling
+  # Use the following properties to control sampling in the agent.
+  # ============================================================================
+  # sampling:
+
+    # Set to `true` to enable sampling.
+    # enable: false
+
+    # This property indicates the number of requests
+    # to analyze in each window before sampling begins.
+    # baseline: 5
+
+# ==============================================================================
+# protect
+# Use the properties in this section to override Protect features.
+# ==============================================================================
+# protect:
+
+  # Use the properties in this section to determine if the
+  # Protect feature should be enabled. If this property is not
+  # present, the decision is delegated to the Contrast UI.
+  # enable: false
+
+  # ============================================================================
+  # protect.probe_analysis
+  # Use the settings in this section to
+  # control the behavior of probe analysis.
+  # Support for this option is limited to Node agent versions >= 5
+  # ============================================================================
+  # probe_analysis:
+
+    # Set to `false` to disable probe analysis.
+    # enable: true
+
+  # ============================================================================
+  # protect.rules
+  # Use the following properties to set simple rule configurations.
+  # ============================================================================
+  # rules:
+
+    # Define a list of Protect rules to disable in the agent.To view a list
+    # of rule names, in Contrast go to user menu > Policy Management >
+    # Assess rules. The rules must be formatted as a comma-delimited list.
+    # disabled_rules: NEEDS_TO_BE_SET
+
+    # ==========================================================================
+    # protect.rules.bot-blocker
+    # Use the following selection to configure if the
+    # agent blocks bots. Set to `true` to enable blocking.
+    # ==========================================================================
+    # bot-blocker:
+
+      # Set to `true` for the agent to block known bots.
+      # enable: false
+
+    # ==========================================================================
+    # protect.rules.sql-injection
+    # Use the following settings to configure the sql-injection rule.
+    # ==========================================================================
+    # sql-injection:
+
+      # Set the mode of the rule. Value options are
+      # `monitor`, `block`, `block_at_perimeter`, or off.
+      #  
+      # Note - If a setting says, "if blocking is enabled",
+      # the setting can be `block` or `block_at_perimeter`.
+      #  
+      # mode: off
+
+    # ==========================================================================
+    # protect.rules.cmd-injection
+    # Use the following properties to configure
+    # how the command injection rule works.
+    # ==========================================================================
+    # cmd-injection:
+
+      # Set the mode of the rule. Value options are
+      # `monitor`, `block`, `block_at_perimeter`, or `off`.
+      #  
+      # Note - If a setting says, "if blocking is enabled",
+      # the setting can be `block` or `block_at_perimeter`.
+      #  
+      # mode: off
+
+    # ==========================================================================
+    # protect.rules.cmd-injection-semantic-chained-commands
+    # Use the following properties to configure how the
+    # 'command injection - chained commands' rule works
+    # ==========================================================================
+    # cmd-injection-semantic-chained-commands:
+
+      # Set the mode of the rule. Value options
+      # are `monitor`, `block`, or `off`.
+      # mode: off
+
+    # ==========================================================================
+    # protect.rules.cmd-injection-semantic-dangerous-paths
+    # Use the following properties to configure how the
+    # 'command injection - dangerous paths' rule works
+    # ==========================================================================
+    # cmd-injection-semantic-dangerous-paths:
+
+      # Set the mode of the rule. Value options
+      # are `monitor`, `block`, or `off`.
+      # mode: off
+
+    # ==========================================================================
+    # protect.rules.cmd-injection-command-backdoors
+    # Use the following properties to configure how the
+    # 'command injection - command backdoors' rule works
+    # ==========================================================================
+    # cmd-injection-command-backdoors:
+
+      # Set the mode of the rule. Value options
+      # are `monitor`, `block`, or `off`.
+      # mode: off
+
+    # ==========================================================================
+    # protect.rules.path-traversal-semantic-file-security-bypass
+    # Use the following properties to configure how the
+    # 'path traversal - file security bypass' rule works
+    # ==========================================================================
+    # path-traversal-semantic-file-security-bypass:
+
+      # Set the mode of the rule. Value options
+      # are `monitor`, `block`, or `off`.
+      # mode: off
+
+    # ==========================================================================
+    # protect.rules.path-traversal
+    # Use the following properties to configure
+    # how the path traversal rule works.
+    # ==========================================================================
+    # path-traversal:
+
+      # Set the mode of the rule. Value options are
+      # `monitor`, `block`, `block_at_perimeter`, or `off`.
+      #  
+      # Note - If a setting says, "if blocking is enabled",
+      # the setting can be `block` or `block_at_perimeter`.
+      #  
+      # mode: off
+
+    # ==========================================================================
+    # protect.rules.method-tampering
+    # Use the following properties to configure
+    # how the method tampering rule works.
+    # ==========================================================================
+    # method-tampering:
+
+      # Set the mode of the rule. Value options are
+      # `monitor`, `block`, `block_at_perimeter`, or `off`.
+      #  
+      # Note - If a setting says, "if blocking is enabled",
+      # the setting can be `block` or `block_at_perimeter`.
+      #  
+      # mode: off
+
+    # ==========================================================================
+    # protect.rules.reflected-xss
+    # Use the following properties to configure how
+    # the reflected cross-site scripting rule works.
+    # ==========================================================================
+    # reflected-xss:
+
+      # Set the mode of the rule. Value options are
+      # `monitor`, `block`, `block_at_perimeter`, or `off`.
+      #  
+      # Note - If a setting says, "if blocking is enabled",
+      # the setting can be `block` or `block_at_perimeter`.
+      #  
+      # mode: off
+
+    # ==========================================================================
+    # protect.rules.unsafe-file-upload
+    # Use the following properties to configure
+    # how the unsafe file upload rule works.
+    # ==========================================================================
+    # unsafe-file-upload:
+
+      # Set the mode of the rule. Value options are
+      # `monitor`, `block`, `block_at_perimeter`, or `off`.
+      #  
+      # Note - If a setting says, "if blocking is enabled",
+      # the setting can be `block` or `block_at_perimeter`.
+      #  
+      # mode: off
+
+    # ==========================================================================
+    # protect.rules.xxe
+    # Use the following properties to configure
+    # how the XML external entity works.
+    # ==========================================================================
+    # xxe:
+
+      # Set the mode of the rule. Value options are
+      # `monitor`, `block`, `block_at_perimeter`, or `off`.
+      #  
+      # Note - If a setting says, "if blocking is enabled",
+      # the setting can be `block` or `block_at_perimeter`.
+      #  
+      # mode: off
+
+    # ==========================================================================
+    # protect.rules.untrusted-deserialization
+    # Use the following properties to configure
+    # how the untrusted deserialization rule works.
+    # ==========================================================================
+    # untrusted-deserialization:
+
+      # Set the mode of the rule. Value options are
+      # `monitor`, `block`, `block_at_perimeter`, or `off`.
+      #  
+      # Note - If a setting says, "if blocking is enabled",
+      # the setting can be `block` or `block_at_perimeter`.
+      #  
+      # mode: off
+
+    # ==========================================================================
+    # protect.rules.ssjs-injection
+    # Use the following properties to configure
+    # how the SSJS Injection rule works.
+    # ==========================================================================
+    # ssjs-injection:
+
+      # Set the mode of the rule. Value options are
+      # `monitor`, `block`, `block_at_perimeter`, or `off`.
+      #  
+      # Note - If a setting says, "if blocking is enabled",
+      # the setting can be `block` or `block_at_perimeter`.
+      #  
+      # mode: off
+
+    # ==========================================================================
+    # protect.rules.nosql-injection
+    # Use the following properties to configure
+    # how the NOSQL Injection rule works.
+    # ==========================================================================
+    # nosql-injection:
+
+      # Set the mode of the rule. Value options are
+      # `monitor`, `block`, `block_at_perimeter`, or `off`.
+      #  
+      # Note - If a setting says, "if blocking is enabled",
+      # the setting can be `block` or `block_at_perimeter`.
+      #  
+      # mode: off
+
+    # ==========================================================================
+    # protect.rules.nosql-injection-mongo
+    # Use the following properties to configure
+    # how the NOSQL Injection rule works.
+    # ==========================================================================
+    # nosql-injection-mongo:
+
+      # Set the mode of the rule. Value options are
+      # `monitor`, `block`, `block_at_perimeter`, or `off`.
+      #  
+      # Note - If a setting says, "if blocking is enabled",
+      # the setting can be `block` or `block_at_perimeter`.
+      #  
+      # mode: off
+
+# ==============================================================================
+# application
+# Use the properties in this section for
+# the application(s) hosting this agent.
+# ==============================================================================
+application:
+
+  # Override the reported application name.
+  #  
+  # Note - On Java systems where multiple, distinct applications may be
+  # served by a single process, this configuration causes the agent to report
+  # all discovered applications as one application with the given name.
+  #  
+  name: authing-petclinic-crawl
+
+  # Override the reported application path.
+  # path: NEEDS_TO_BE_SET
+
+  # Add the name of the application group with which this
+  # application should be associated in the Contrast UI.
+  # group: NEEDS_TO_BE_SET
+
+  # Add the application code this application should use in the Contrast UI.
+  # code: NEEDS_TO_BE_SET
+
+  # Override the reported application version.
+  # version: NEEDS_TO_BE_SET
+
+  # Pass arguments to the underlying application.
+  # args: NEEDS_TO_BE_SET
+
+  # Apply labels to an application. Labels must
+  # be formatted as a comma-delimited list.
+  # Example - `label1,label2,label3`
+  #  
+  # tags: NEEDS_TO_BE_SET
+
+  # Define a set of `key=value` pairs (which conforms to RFC 2253) for
+  # specifying user-defined metadata associated with the application. The
+  # set must be formatted as a comma-delimited list of `key=value` pairs.
+  # Example - `business-unit=accounting, office=Baltimore`
+  #  
+  # metadata: NEEDS_TO_BE_SET
+
+  # Provide the ID of a session which already exists in the Contrast
+  # UI. Vulnerabilities discovered by the agent are associated with
+  # this session. If an invalid ID is supplied, the agent will be
+  # disabled. This option and `application.session_metadata` are
+  # mutually exclusive; if both are set, the agent will be disabled.
+  # session_id: NEEDS_TO_BE_SET
+
+  # Provide metadata which is used to create a new session ID in the
+  # Contrast UI. Vulnerabilities discovered by the agent are associated with
+  # this new session. This value should be formatted as `key=value` pairs
+  # (conforming to RFC 2253). Available key names for this configuration
+  # are branchName, buildNumber, commitHash, committer, gitTag, repository,
+  # testRun, and version. This option and `application.session_id` are
+  # mutually exclusive; if both are set the agent will be disabled.
+  # session_metadata: NEEDS_TO_BE_SET
+
+# ==============================================================================
+# server
+# Use the settings in this section to set metadata for the server
+# hosting this agent. Contrast recognizes common, supported server
+# names, paths, types and environments. Doing this may require a new
+# server or license, and it may affect functionality of some features.
+# ==============================================================================
+server:
+
+  # Override the reported server name.
+  name: FIXME
+
+  # Override the reported server path.
+  # path: NEEDS_TO_BE_SET
+
+  # Override the reported server type.
+  # type: NEEDS_TO_BE_SET
+
+  # Set the environment directly to override the default set
+  # by the Contrast UI. This allows the user to configure the
+  # environment dynamically at startup rather than manually
+  # updating the Server in the Contrast UI themselves afterwards.
+  #  
+  # Valid values include `QA`, `PRODUCTION` and `DEVELOPMENT`.
+  # For example, `PRODUCTION` registers this Server as
+  # running in a `PRODUCTION` environment, regardless of the
+  # organization's default environment in the Contrast UI.
+  #  
+  # environment: NEEDS_TO_BE_SET
+
+  # Apply a list of labels to the server. Labels
+  # must be formatted as a comma-delimited list.
+  # Example - `label1,label2,label3`
+  #  
+  # tags: NEEDS_TO_BE_SET
