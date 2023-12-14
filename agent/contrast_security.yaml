@@ -17,21 +17,25 @@ api:
 
   # ********************** REQUIRED **********************
   # Set the URL for the Contrast UI.
-  url: FIXME
+  url: https://apptwo.contrastsecurity.com/Contrast
+#  url: https://teamserver-staging.contsec.com/Contrast
 
   # ********************** REQUIRED **********************
   # Set the API key needed to communicate with the Contrast UI.
-  api_key: FIXME
+  api_key: lgZ1hbBC7VKeYNkmU9b5GvmMDz75rqeH
+#  api_key: sjvfAWac9Wv8H5NfA6SO2QT7mot9O1vh
 
   # ********************** REQUIRED **********************
   # Set the service key needed to communicate with the Contrast
   # UI. It is used to calculate the Authorization header.
-  service_key: FIXME
+  service_key: DK4531VJVQ0FGPK4
+#  service_key: 0HK2OG1F4PITGG18
 
   # ********************** REQUIRED **********************
   # Set the user name used to communicate with the Contrast
   # UI. It is used to calculate the Authorization header.
-  user_name: FIXME
+  user_name: agent_6e31095f-d4e6-4125-b98d-834b7de086ea@ContrastJavaTeam
+#  user_name: agent_ca831b42-4d81-4e57-8baf-81621606beff@Javaphil
 
   # ============================================================================
   # api.proxy
@@ -666,7 +670,7 @@ application:
 server:
 
   # Override the reported server name.
-  name: FIXME
+  name: Phils-Mac-crawler
 
   # Override the reported server path.
   # path: NEEDS_TO_BE_SET

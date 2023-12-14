@@ -86,7 +86,14 @@
           </div>
         </ul>
       </div>
-    </div>
+      <div sec:authorize="isAnonymous()">
+        <div class="ms-auto">
+          <span style="color:lightgoldenrodyellow">Guest</span>
+        </div>
+      </div>
+      <div sec:authorize="isAuthenticated()">
+        <span style="color:lightgoldenrodyellow">User: </span><span style="color:lightgoldenrodyellow">user</span>
+      </div>
   </nav>
   <div class="container-fluid">
     <div class="container xd-container">
